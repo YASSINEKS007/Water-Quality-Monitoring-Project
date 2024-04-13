@@ -3,9 +3,9 @@ import Table from '../components/Table'
 
 function MeasurementsPage() {
   return (
-    <>
+    <div>
       <Table/>
-    </>
+    </div>
   )
 }
 
