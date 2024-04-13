@@ -19,7 +19,6 @@ function Temperature() {
       const data = await response.json();
       const latestTemperature = getLatestTemperature(data);
       setTemperature(latestTemperature);
-      console.log(data)
     } catch (error) {
       console.error("Error fetching temperature data:", error);
     }

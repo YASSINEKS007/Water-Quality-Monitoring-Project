@@ -1,3 +1,9 @@
+.custom-bg-white {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .custom-gauge.skill {
   width: 160px;
   height: 160px;
@@ -28,41 +34,41 @@
     0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
 }
 
-#custom-gauge-number {
+.custom-gauge-number {
   font-weight: 600;
   color: #555;
 }
 
-#custom_gauge_circle {
+.custom-gauge-circle {
   fill: none;
-  stroke: url(#custom-gauge_GradientColor);
+  stroke: url(#custom-gauge-GradientColor);
   stroke-width: 20px;
   stroke-dasharray: 472;
   stroke-dashoffset: 472;
-  animation: anim 2s linear forwards;
+  animation: custom-anim 2s linear forwards;
 }
 
-#svg_gauge {
+.custom-svg-gauge {
   position: absolute;
   top: 0;
   left: 0;
 }
 
-@keyframes anim {
+@keyframes custom-anim {
   100% {
     stroke-dashoffset: 500-125;
   }
 }
 
-.d-flex {
+.custom-d-flex {
   display: flex;
 }
 
-.justify-content-center {
+.custom-justify-content-center {
   justify-content: center;
 }
 
-.align-items-center {
+.custom-align-items-center {
   align-items: center;
 }
 

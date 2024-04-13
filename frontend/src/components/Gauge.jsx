@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../css/Gauge.css";
 
-const Gauge = ({ value }) => {
+const Gauge = () => {
   const [counter, setCounter] = useState(0);
   const [quality, setQuality] = useState("");
-  let animationDuration = 0; // Define animationDuration here
+  let animationDuration = 0; 
+  let value = 56;
 
   useEffect(() => {
     const difference = Math.abs(value - counter);
@@ -29,33 +30,37 @@ const Gauge = ({ value }) => {
   }, [counter, value]);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 d-flex justify-content-center align-items-center">
+    <div className="custom-bg-white rounded-lg shadow-md p-6 custom-d-flex custom-justify-content-center custom-align-items-center">
+      <div className="text-center mb-3">
+        <h2 className="text-xl font-bold">WQI</h2>
+      </div>
+
       <div className="custom-gauge skill">
         <div className="custom-gauge outer">
           <div className="custom-gauge inner ">
             <div className="text-center">
               <div className="text-center">
-                <div className="text-4xl font-bold mb-2">{counter}%</div>
+                <div className="text-4xl font-bold mb-2">{counter}</div>
                 <div className="text-lg font-normal">{quality}</div>
               </div>
             </div>
           </div>
         </div>
         <svg
-          id="svg_gauge"
+          className="custom-svg-gauge"
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           width="160px"
           height="160px"
         >
           <defs>
-            <linearGradient id="custom-gauge_GradientColor">
+            <linearGradient id="custom-gauge-GradientColor">
               <stop offset="0%" stopColor="#e91e63" />
               <stop offset="100%" stopColor="#673ab7" />
             </linearGradient>
           </defs>
           <circle
-            id="custom_gauge_circle"
+            className="custom-gauge-circle"
             cx="80"
             cy="80"
             r="70"

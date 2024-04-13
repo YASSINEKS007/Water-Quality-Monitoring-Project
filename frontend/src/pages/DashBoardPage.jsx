@@ -4,25 +4,20 @@ import Temperature from "../components/Temperature";
 import MixedChart from "../components/MixedChart";
 import LineChart from "../components/LineChart";
 import Gauge from "../components/Gauge";
+import Gauge2 from "../components/Gauge2";
 
 function DashBoardPage() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-2 ">
-      <div className="col-span-1">
+      <div className="col-span-1 mt-2">
         <Temperature />
       </div>
-      <div className="col-span-1">
-        <Gauge value={25} />
+      <div className="col-span-1 mt-2">
+        <Gauge2 />
+        {/* <Gauge title="Overall Progress" value={75} /> */}
       </div>
-      <div className="col-span-1">
-        <Statistics
-          stats={{
-            mean: 7.25,
-            std: 0.57,
-            min: 560,
-            max: 9.0,
-          }}
-        />
+      <div className="col-span-1 mt-2">
+        <Statistics />
       </div>
       <div className="md:col-span-3">
         <div className="grid grid-cols-2 gap-6">

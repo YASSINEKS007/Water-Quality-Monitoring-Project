@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 
 const MixedChart = () => {
-  const [selectedValue, setSelectedValue] = useState("pH");
+  const [selectedValue, setSelectedValue] = useState("Conductivity");
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedYear, setSelectedYear] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false); // added missing state
+  const [selectedYear, setSelectedYear] = useState("2012");
+  const [startDate, setStartDate] = useState("2014-10-05");
+  const [endDate, setEndDate] = useState("2014-12-31");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedValue]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("/api/mixedChart", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const responseData = await response.json();
+      setData(responseData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const handleChange = (e) => {
     setSelectedValue(e.target.value);
@@ -30,21 +50,32 @@ const MixedChart = () => {
     }
   };
 
-  const toggleDropdown = () => { // corrected function name
-    setShowDropdown(!showDropdown); // corrected state name
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
   };
 
-  const data1 = [2, 4, 6, 9, 12, 15, 18, 20, 21, 20, 18, 15, 12, 9, 6, 4, 2];
+  // Filter data for selected measure and date range
+  const selectedData = data.find((entry) => entry.label === selectedValue);
+  let filteredData = {};
+  if (selectedData && selectedData.data) {
+    const selectedDataEntries = Object.entries(selectedData.data);
+    filteredData = selectedDataEntries.reduce((acc, [date, value]) => {
+      if (date >= startDate && date <= endDate) {
+        acc[date] = value;
+      }
+      return acc;
+    }, {});
+  }
 
-  const purpleColor = "rgba(128, 0, 128, 0.6)";
-
-  const data = {
-    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 9, 8, 7, 6, 5, 4, 3],
+  // Prepare labels and datasets
+  const labels = Object.keys(filteredData);
+  const dataset = {
+    labels: labels,
     datasets: [
       {
-        label: "Bar",
-        data: data1,
-        backgroundColor: purpleColor,
+        label: selectedValue,
+        data: Object.values(filteredData),
+        backgroundColor: "rgba(128, 0, 128, 0.6)",
         borderColor: "rgba(87, 121, 234, 0.6)",
         barPercentage: 1,
         categoryPercentage: 1,
@@ -52,9 +83,9 @@ const MixedChart = () => {
       },
       {
         label: "Line",
-        data: data1,
+        data: Object.values(filteredData),
         backgroundColor: "transparent",
-        borderColor: purpleColor,
+        borderColor: "purple", // Replace with the actual color value
         borderWidth: 3,
         fill: false,
         pointHoverRadius: 8,
@@ -111,11 +142,13 @@ const MixedChart = () => {
           onChange={handleChange}
           className="focus:outline-none bg-white rounded px-3 py-1 text-gray-700"
         >
+          <option value="Temperature">Temperature</option>
           <option value="pH">pH</option>
-          <option value="DO">DO</option>
+          <option value="D.O.">DO</option>
           <option value="Conductivity">Conductivity</option>
-          <option value="BOD">BOD</option>
+          <option value="B.O.D.">B.O.D</option>
           <option value="Nitrate">Nitrate</option>
+          <option value="Fecal Coliform">Fecal Coliform</option>
         </select>
       </div>
       {/* More details dropdown */}
@@ -143,8 +176,8 @@ const MixedChart = () => {
               className="border rounded px-3 py-1 mb-4 w-full"
               onChange={(e) => handleYearChange(e.target.value)}
             >
-              <option value="">Select Year</option>
-              {[2012, 2013, 2014].map((year) => (
+              <option value="2012">2012</option>
+              {[2013, 2014].map((year) => (
                 <option key={year} value={year}>
                   {year}
                 </option>
@@ -195,9 +228,13 @@ const MixedChart = () => {
       )}
 
       <div className="flex justify-center p-4 border-b border-gray-200">
-        <h1 className="text-xl font-bold text-gray-700">pH distribution in 2012</h1>{" "}
+        <h1 className="text-xl font-bold text-gray-700 mt-8">
+          {selectedValue} distribution from{" "}
+          {new Date(startDate).toLocaleDateString("en-GB")} to{" "}
+          {new Date(endDate).toLocaleDateString("en-GB")}
+        </h1>{" "}
       </div>
-      <Bar data={data} options={options} />
+      <Bar data={dataset} options={options} />
     </div>
   );
 };
