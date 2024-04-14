@@ -1,15 +1,14 @@
 import React from "react";
 import Chart from "chart.js/auto";
+import MainLayout from "./layouts/MainLayout";
+import DashBoardPage from "./pages/DashBoardPage";
+import MeasurementsPage from "./pages/MeasurementsPage";
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-
-import MainLayout from "./layouts/MainLayout";
-import DashBoardPage from "./pages/DashBoardPage";
-import MeasurementsPage from "./pages/MeasurementsPage";
 
 
 const App = () => {

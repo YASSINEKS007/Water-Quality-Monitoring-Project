@@ -70,25 +70,34 @@ const Statistics = () => {
             <tr className="bg-gray-100">
               <td className="px-4 py-2">Mean</td>
               <td className="px-4 py-2">
-                {statistics[selectedValue]?.mean || ""}
+                {statistics[selectedValue]?.mean !== undefined
+                  ? statistics[selectedValue]?.mean
+                  : ""}
               </td>
             </tr>
+
             <tr className="bg-gray-100">
               <td className="px-4 py-2">Std</td>
               <td className="px-4 py-2">
-                {statistics[selectedValue]?.std || ""}
+                {statistics[selectedValue]?.std !== undefined
+                  ? statistics[selectedValue]?.std
+                  : ""}
               </td>
             </tr>
             <tr className="bg-gray-100">
               <td className="px-4 py-2">Min</td>
               <td className="px-4 py-2">
-                {statistics[selectedValue]?.min || ""}
+                {statistics[selectedValue]?.min !== undefined
+                  ? statistics[selectedValue]?.min
+                  : ""}
               </td>
             </tr>
             <tr className="bg-gray-100">
               <td className="px-4 py-2">Max</td>
               <td className="px-4 py-2">
-                {statistics[selectedValue]?.max || ""}
+                {statistics[selectedValue]?.max !== undefined
+                  ? statistics[selectedValue]?.max
+                  : ""}
               </td>
             </tr>
           </tbody>

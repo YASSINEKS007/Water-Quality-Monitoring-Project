@@ -9,8 +9,7 @@ import numpy as np
 from scipy.stats import zscore
 from sklearn.preprocessing import StandardScaler
 from flask import request
-
-
+import logging
 
 
 app = Flask(__name__)
@@ -32,7 +31,8 @@ def send_table():
 
 @app.route('/statistics', methods=['GET'])
 def send_statistics():
-    json_data = data.describe().to_json(orient="columns")
+    df_measures = data.drop(columns=["STATION CODE", "LOCATIONS", "STATE", "Temp", "year", "date"])
+    json_data = df_measures.describe().to_json(orient="columns")
     parsed_json = json.loads(json_data)
     return jsonify(parsed_json)
 
@@ -119,46 +119,56 @@ def send_mixedChart():
 @app.route('/gauge', methods=['GET'])
 def wqi_gauge():
     specified_date = request.args.get('specified_date')
-    print(type(specified_date))
     df = data.copy()
-    df['date'] = pd.to_datetime(df['date'])
     df.set_index('date', inplace=True)
-    
-    # Convert specified_date to datetime if it's not already
-    if not isinstance(specified_date, pd.Timestamp):
-        specified_date = pd.to_datetime(specified_date)
+    # Convert the index type to string
+    df.index = df.index.astype(str)
+
+    # Get the data for the specified date
+    data_for_date = df.loc[specified_date]
+
+    df = df.drop(columns=["STATION CODE", "LOCATIONS", "STATE", "Temp", "year"])
+    for column in df.columns[:len(df.columns)- 1]:
+                df[column] = pd.to_numeric(df[column], errors='coerce')
+                
+    df.fillna(df.median(), inplace=True)
+    z_scores = df.apply(zscore)
+    outliers_count = (z_scores.abs() > 3).sum()
+    df_outliers = np.where(np.abs(z_scores) > 3)[0]
+    df_filtered = df.drop(df.index[df_outliers])
+
+    # Scale the dataset
+    scaler = StandardScaler()
+    X = df_filtered.values
+    X_scaled = scaler.fit_transform(X)
+    index_number = df_filtered.index.get_loc(specified_date)
+    index_number
+    wqi = predict_wqi(X_scaled[index_number])
+    print("Predicted WQI:", wqi)
+            
+    wqc = get_wqc(wqi)
+    return jsonify({"wqi": round(wqi, 2), "wqc": wqc})
+
         
-    try: 
-    
-        index_of_date = df.index.get_loc(specified_date)
-        
-        df = df.drop(columns=["STATION CODE", "LOCATIONS", "STATE", "Temp", "year"])
-        
-        for column in df.columns:
+logging.basicConfig(filename='flask.log', level=logging.DEBUG)
+
+@app.route('/dates', methods=['GET'])
+def test_wqi_gauge():
+    df = data.copy()
+    df = df.drop(columns=["STATION CODE", "LOCATIONS", "STATE", "Temp", "year"])
+    for column in df.columns[:len(df.columns)- 1]:
             df[column] = pd.to_numeric(df[column], errors='coerce')
             
-        df.fillna(df.median(), inplace=True)
-        
-        # Checking for outliers in the full dfset
-        z_scores = df.apply(zscore)
-        outliers_count = (z_scores.abs() > 3).sum()
-        df_outliers = np.where(np.abs(z_scores) > 3)[0]
-        df_filtered = df.drop(df.index[df_outliers])
-        
-        # Scale the df
-        scaler = StandardScaler()
-        X = df_filtered.values
-        X_scaled = scaler.fit_transform(X)
-        wqi = predict_wqi(X_scaled[index_of_date])
-        print(wqi)
-        print(type(wqi))
-        wqc = get_wqc(wqi)
-        
-        # Return the data as JSON
-        return jsonify({"wqi": round(wqi, 2), "wqc": wqc})
-    
-    except KeyError:
-        return jsonify({"wqi": "0", "wqc": "No data is available"})
+    median_date_excluded = df.iloc[:, :-1].median()
+    df.fillna(median_date_excluded, inplace=True)
+
+    z_scores = df.iloc[:, :-1].apply(zscore)
+    outlier_indices = np.where(np.abs(z_scores) > 3)
+    df_filtered = df.drop(df.index[outlier_indices[0]])
+    dates_ = pd.to_datetime(df_filtered["date"], errors='coerce').values
+    str_dates = [np.datetime_as_string(i, timezone='UTC', unit='D') for i in dates_]
+
+    return jsonify(str_dates)
 
 
 if __name__ == '__main__':
