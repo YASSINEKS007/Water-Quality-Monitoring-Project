@@ -38,9 +38,9 @@ function Table() {
 
   // Effect to add scroll event listener
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -125,8 +125,11 @@ function Table() {
   };
 
   const paginationButtonStyles = {
+    width: "50px", // Adjust as needed
+    height: "40px", // Adjust as needed
     backgroundColor: "#D6BCFA", // Light purple color, matching the table header
     border: "1px solid #D1D5DB",
+    margin: "3px",
     color: "#4B5563",
     cursor: "pointer",
     padding: "8px 12px",
@@ -146,7 +149,6 @@ function Table() {
     color: "#6b7280",
     cursor: "not-allowed",
   };
-
 
   return (
     <div className="container mx-auto px-4 py-8 relative">
@@ -271,7 +273,7 @@ function Table() {
             className={`pagination-item ${currentPage === 1 ? "disabled" : ""}`}
           >
             <button
-              style={paginationButtonStyles}
+              style={{ ...paginationButtonStyles }}
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
             >

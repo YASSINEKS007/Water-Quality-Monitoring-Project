@@ -3,7 +3,6 @@ import Statistics from "../components/Statistics";
 import Temperature from "../components/Temperature";
 import MixedChart from "../components/MixedChart";
 import LineChart from "../components/LineChart";
-import Gauge from "../components/Gauge";
 import Gauge2 from "../components/Gauge2";
 
 function DashBoardPage() {
