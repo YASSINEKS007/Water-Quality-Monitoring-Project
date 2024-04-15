@@ -159,7 +159,7 @@ const Gauge2 = () => {
             <div className="custom-gauge inner">
               <div className="text-center">
                 <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">{counter}</div>
+                  <div className="text-4xl font-bold mb-2">{counter.toFixed(2)}</div>
                   <div className="text-lg font-normal">{wqc}</div>
                 </div>
               </div>
