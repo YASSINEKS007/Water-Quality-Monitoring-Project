@@ -7,6 +7,8 @@ const MixedChart = () => {
   const [selectedYear, setSelectedYear] = useState("2012");
   const [startDate, setStartDate] = useState("2014-10-05");
   const [endDate, setEndDate] = useState("2014-12-31");
+  const [tempStartDate, setTempStartDate] = useState("2014-10-05");
+  const [tempEndDate, setTempEndDate] = useState("2014-12-31");
   const [showDropdown, setShowDropdown] = useState(false);
   const [data, setData] = useState([]);
 
@@ -39,19 +41,27 @@ const MixedChart = () => {
 
   const handleYearChange = (year) => {
     setSelectedYear(year);
+    setTempStartDate(`${year}-01-01`);
+    setTempEndDate(`${year}-12-31`);
   };
 
   const handleDateChange = (e, type) => {
     const value = e.target.value;
     if (type === "start") {
-      setStartDate(value);
+      setTempStartDate(value);
     } else if (type === "end") {
-      setEndDate(value);
+      setTempEndDate(value);
     }
   };
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
+  };
+
+  const applyDateRange = () => {
+    setStartDate(tempStartDate);
+    setEndDate(tempEndDate);
+    togglePopup();
   };
 
   // Filter data for selected measure and date range
@@ -176,8 +186,8 @@ const MixedChart = () => {
               className="border rounded px-3 py-1 mb-4 w-full"
               onChange={(e) => handleYearChange(e.target.value)}
             >
-              <option value="2012">2012</option>
-              {[2013, 2014].map((year) => (
+              <option value="2014">2014</option>
+              {[2013, 2012].map((year) => (
                 <option key={year} value={year}>
                   {year}
                 </option>
@@ -190,7 +200,7 @@ const MixedChart = () => {
                   <input
                     type="date"
                     className="border rounded px-2 py-1 w-full"
-                    value={startDate}
+                    value={tempStartDate}
                     onChange={(e) => handleDateChange(e, "start")}
                     min={`${selectedYear}-01-01`}
                     max={`${selectedYear}-12-31`}
@@ -201,39 +211,42 @@ const MixedChart = () => {
                   <input
                     type="date"
                     className="border rounded px-2 py-1 w-full"
-                    value={endDate}
+                    value={tempEndDate}
                     onChange={(e) => handleDateChange(e, "end")}
                     min={`${selectedYear}-01-01`}
                     max={`${selectedYear}-12-31`}
                   />
                 </div>
+                <div className="flex justify-center">
+                  <button
+                    className="bg-purple-200 hover:bg-purple-300 focus:bg-purple-300 text-purple-800 px-5 py-3 rounded-md shadow-md transition-colors duration-300 mr-4"
+                    onClick={togglePopup}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 text-white px-5 py-3 rounded-md shadow-md transition-colors duration-300"
+                    onClick={applyDateRange}
+                  >
+                    OK
+                  </button>
+                </div>
               </>
             )}
-            <div className="flex justify-center">
-              <button
-                className="bg-purple-200 hover:bg-purple-300 focus:bg-purple-300 text-purple-800 px-5 py-3 rounded-md shadow-md transition-colors duration-300 mr-4"
-                onClick={togglePopup}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 text-white px-5 py-3 rounded-md shadow-md transition-colors duration-300"
-                onClick={togglePopup}
-              >
-                OK
-              </button>
-            </div>
           </div>
         </div>
       )}
 
-      <div className="flex justify-center p-4 border-b border-gray-200">
-        <h1 className="text-xl font-bold text-gray-700 mt-8">
-          {selectedValue} distribution from{" "}
-          {new Date(startDate).toLocaleDateString("en-GB")} to{" "}
-          {new Date(endDate).toLocaleDateString("en-GB")}
-        </h1>{" "}
-      </div>
+      {selectedYear && (
+        <div className="flex justify-center p-4 border-b border-gray-200">
+          <h1 className="text-xl font-bold text-gray-700 mt-8">
+            {selectedValue} distribution from{" "}
+            {new Date(startDate).toLocaleDateString("en-GB")} to{" "}
+            {new Date(endDate).toLocaleDateString("en-GB")}
+          </h1>{" "}
+        </div>
+      )}
+
       <Bar data={dataset} options={options} />
     </div>
   );
