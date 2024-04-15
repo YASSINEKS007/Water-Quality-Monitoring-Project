@@ -268,18 +268,7 @@ function Table() {
 
       <div className="flex justify-center mt-4">
         <ul style={paginationStyles} className="pagination">
-          <li
-            style={paginationItemStyles}
-            className={`pagination-item ${currentPage === 1 ? "disabled" : ""}`}
-          >
-            <button
-              style={{ ...paginationButtonStyles }}
-              onClick={() => paginate(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Prev
-            </button>
-          </li>
+          
           {/* Pagination Items */}
           {Array.from(
             { length: Math.ceil(filteredData.length / itemsPerPage) },
@@ -304,24 +293,7 @@ function Table() {
             </li>
           ))}
           {/* Pagination Next Button */}
-          <li
-            style={paginationItemStyles}
-            className={`pagination-item ${
-              currentPage === Math.ceil(filteredData.length / itemsPerPage)
-                ? "disabled"
-                : ""
-            }`}
-          >
-            <button
-              style={paginationButtonStyles}
-              onClick={() => paginate(currentPage + 1)}
-              disabled={
-                currentPage === Math.ceil(filteredData.length / itemsPerPage)
-              }
-            >
-              Next
-            </button>
-          </li>
+          
         </ul>
       </div>
 

@@ -21,15 +21,16 @@ const Gauge2 = () => {
         });
         const responseData = await response.json();
         setDates(responseData);
-        setSelectedDate(responseData[0]); // Set default date as the first date in the array
+        setSelectedDate(responseData[responseData.length - 1]); // Set selected date as the last date in the array
         console.log(responseData);
       } catch (error) {
         console.error("Error fetching gauge dates:", error);
       }
     };
-
+  
     fetchDates();
   }, []);
+  
 
   useEffect(() => {
     if (selectedDate) {
@@ -82,18 +83,34 @@ const Gauge2 = () => {
     const newAnimationDuration = 2000 * (difference / wqi);
     const updateInterval = Math.min(30, newAnimationDuration / difference);
     const direction = wqi > counter ? 1 : -1;
-
+  
     if (counter !== wqi) {
       const intervalId = setInterval(() => {
         setCounter((prevCounter) => {
           const nextCounter = prevCounter + direction;
-          return direction > 0 ? Math.min(nextCounter, wqi) : Math.max(nextCounter, wqi);
+          // If direction is positive (incrementing), ensure it doesn't exceed wqi
+          if (direction > 0) {
+            if (nextCounter >= wqi) {
+              clearInterval(intervalId);
+              return wqi; // Set counter to final wqi value
+            } else {
+              return nextCounter;
+            }
+          } else { // If direction is negative (decrementing), ensure it doesn't go below wqi
+            if (nextCounter <= wqi) {
+              clearInterval(intervalId);
+              return wqi; // Set counter to final wqi value
+            } else {
+              return nextCounter;
+            }
+          }
         });
       }, updateInterval);
-
+  
       return () => clearInterval(intervalId);
     }
   }, [counter, wqi]);
+  
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
