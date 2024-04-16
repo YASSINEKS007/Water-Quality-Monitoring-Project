@@ -152,7 +152,7 @@ function Table() {
 
   return (
     <div className="container mx-auto px-4 py-8 relative">
-      <div style={styling.inputContainer} className="InputContainer flex">
+      <div style={styling.inputContainer} className="InputContainer flex mb-4">
         <input
           placeholder="Search.."
           style={styling.input}
