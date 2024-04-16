@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const linkClass = ({ isActive }) =>
     isActive
-      ? "bg-purple-600 text-black hover:bg-purple-700 hover:text-white rounded-md px-3 py-2 flex items-center justify-center transition duration-300"
+      ? "bg-purple-600 text-white hover:bg-purple-700 hover:text-white rounded-md px-3 py-2 flex items-center justify-center transition duration-300"
       : "text-black hover:bg-purple-700 hover:text-white rounded-md px-3 py-2 flex items-center justify-center transition duration-300";
 
   const openModal = () => {
@@ -32,6 +32,7 @@ const Navbar = () => {
 
   const [activeTab, setActiveTab] = useState(0); // State to manage active tab index
   const [activeTab2, setActiveTab2] = useState(0); // State to manage active tab index
+
   // Function to generate dummy dashboard cards data
   const generateDashboardCards = () => {
     const data = [
@@ -66,7 +67,15 @@ const Navbar = () => {
 
   const dashboardCards = generateDashboardCards();
 
-  const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
+  const [expandedCards, setExpandedCards] = useState(
+    new Array(dashboardCards.length).fill(false)
+  );
+
+  const toggleCardExpansion = (index) => {
+    const newExpandedCards = [...expandedCards];
+    newExpandedCards[index] = !newExpandedCards[index];
+    setExpandedCards(newExpandedCards);
+  };
 
   return (
     <nav className="bg-white shadow-md">
@@ -240,7 +249,7 @@ const Navbar = () => {
       )}
       {isSecondPopupOpen && (
         <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-gray-900 z-50">
-          <div className="bg-white rounded-lg overflow-hidden w-full max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-3xl shadow-lg">
+          <div className="bg-white rounded-lg overflow-y-auto max-h-96 w-full max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-3xl shadow-lg">
             <div className="w-full">
               <ul className="flex justify-center text-sm font-medium text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
                 <li className="me-2 flex-grow">
@@ -290,23 +299,21 @@ const Navbar = () => {
                         {card.title}
                       </h3>
                       <p className="text-sm text-gray-700">
-                        {card.description.length > 150
+                        {expandedCards[index]
+                          ? card.description
+                          : card.description.length > 150
                           ? `${card.description.substring(0, 150)}...`
                           : card.description}
                       </p>
+                      {card.description.length > 150 && (
+                        <button
+                          className="text-purple-600 hover:underline mt-2 block"
+                          onClick={() => toggleCardExpansion(index)}
+                        >
+                          {expandedCards[index] ? "Show less" : "Show more"}
+                        </button>
+                      )}
                     </div>
-                    {hoveredCardIndex === index && (
-                      <div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-95 z-10">
-                        <div className="p-4 max-w-md">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                            {card.title}
-                          </h3>
-                          <p className="text-sm text-gray-700">
-                            {card.description}
-                          </p>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 ))}
               </div>
