@@ -1,13 +1,14 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Gauge.css";
 
-const Gauge2 = () => {
+function Gauge3() {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
-  const [counter, setCounter] = useState(0);
   const [wqi, setWQI] = useState(0);
   const [wqc, setWQC] = useState("");
   const [dates, setDates] = useState([]);
+  const [stopColorFirst, setStopColorFirst] = useState("#e3edf7");
+  const [stopColorSecond, setStopColorSecond] = useState("#e3edf7");
 
   useEffect(() => {
     const fetchDates = async () => {
@@ -26,10 +27,9 @@ const Gauge2 = () => {
         console.error("Error fetching gauge dates:", error);
       }
     };
-  
+
     fetchDates();
   }, []);
-  
 
   useEffect(() => {
     if (selectedDate) {
@@ -49,10 +49,29 @@ const Gauge2 = () => {
   };
 
   const disabledDates = dates.map((date) => (
-    <option key={date} value={date} disabled={dates.includes(date) ? null : "disabled"}>
+    <option
+      key={date}
+      value={date}
+      disabled={dates.includes(date) ? null : "disabled"}
+    >
       {date}
     </option>
   ));
+
+  function colorSetUp(wqc_value) {
+    if (wqc_value === "good") {
+      setStopColorFirst("#4caf50");
+      setStopColorSecond("#1b5e20");
+    }
+    if (wqc_value === "poor") {
+      setStopColorFirst("#ff9800");
+      setStopColorSecond("#e65100");
+    }
+    if (wqc_value === "unsuitable") {
+      setStopColorFirst("#f44336");
+      setStopColorSecond("#b71c1c");
+    }
+  }
 
   const fetchData = (date) => {
     fetch(`/api/gauge?specified_date=${date}`)
@@ -72,47 +91,19 @@ const Gauge2 = () => {
       });
   };
 
-  const updateWQIandWQC = () => {
-    fetchData(selectedDate);
-    togglePopup();
-  };
-
   useEffect(() => {
-    const difference = Math.abs(wqi - counter);
-    const newAnimationDuration = 2000 * (difference / wqi);
-    const updateInterval = Math.min(30, newAnimationDuration / difference);
-    const direction = wqi > counter ? 1 : -1;
-  
-    if (counter !== wqi) {
-      const intervalId = setInterval(() => {
-        setCounter((prevCounter) => {
-          const nextCounter = prevCounter + direction;
-          // If direction is positive (incrementing), ensure it doesn't exceed wqi
-          if (direction > 0) {
-            if (nextCounter >= wqi) {
-              clearInterval(intervalId);
-              return wqi; // Set counter to final wqi value
-            } else {
-              return nextCounter;
-            }
-          } else { // If direction is negative (decrementing), ensure it doesn't go below wqi
-            if (nextCounter <= wqi) {
-              clearInterval(intervalId);
-              return wqi; // Set counter to final wqi value
-            } else {
-              return nextCounter;
-            }
-          }
-        });
-      }, updateInterval);
-  
-      return () => clearInterval(intervalId);
+    if (wqc) {
+      colorSetUp(wqc);
     }
-  }, [counter, wqi]);
-  
+  }, [wqc]);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
+  };
+
+  const updateWQIandWQC = () => {
+    fetchData(selectedDate);
+    togglePopup();
   };
 
   return (
@@ -145,36 +136,45 @@ const Gauge2 = () => {
           </button>
         </div>
 
-        <div className="custom-gauge skill">
-          <div className="custom-gauge outer">
-            <div className="custom-gauge inner">
+        <div className="custom-skill">
+          <div className="custom-outer">
+            <div className="custom-inner">
               <div className="text-center">
                 <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">{counter.toFixed(2)}</div>
+                  <div className="text-3xl font-bold mb-2">
+                    {wqi.toFixed(2)}
+                  </div>
                   <div className="text-lg font-normal">{wqc}</div>
                 </div>
               </div>
             </div>
           </div>
           <svg
-            className="custom-svg-gauge"
+            id="custom-svg"
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
             width="160px"
             height="160px"
           >
             <defs>
-              <linearGradient id="custom-gauge-GradientColor">
-                <stop offset="0%" stopColor="#e91e63" />
-                <stop offset="100%" stopColor="#673ab7" />
+              <linearGradient id="custom-GradientColor">
+                <stop
+                  offset="0%"
+                  stopColor={stopColorFirst}
+                />
+                <stop
+                  offset="100%"
+                  stopColor={stopColorSecond}
+                />
               </linearGradient>
             </defs>
             <circle
-              className="custom-gauge-circle"
+              id="custom-circle"
               cx="80"
               cy="80"
               r="70"
               strokeLinecap="round"
+              fill="url(#custom-GradientColor)"
             />
           </svg>
         </div>
@@ -184,9 +184,7 @@ const Gauge2 = () => {
         <div className="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded shadow-md w-80">
             <h2 className="text-lg font-bold mb-4 text-center">Select Date</h2>
-            <select {...inputProps}>
-              {disabledDates}
-            </select>
+            <select {...inputProps}>{disabledDates}</select>
             <div className="flex justify-center">
               <button
                 className="bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 text-white px-5 py-3 rounded-md shadow-md transition-colors duration-300"
@@ -200,6 +198,6 @@ const Gauge2 = () => {
       )}
     </>
   );
-};
+}
 
-export default Gauge2;
+export default Gauge3;

@@ -11,11 +11,11 @@ from sklearn.preprocessing import StandardScaler
 from flask import request
 import logging
 
-
 app = Flask(__name__)
 
 data = pd.read_csv("../backend/dataset/indian_water_physicochemical_parameters.csv", encoding='unicode_escape')
 data = data.loc[:, ~data.columns.str.contains('^Unnamed')]
+# data = pd.read_csv("../backend/dataset/data_generation.csv")
 dates = data["date"].values
 
 @app.route('/temperature', methods=['GET'])

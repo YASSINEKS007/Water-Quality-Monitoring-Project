@@ -4,6 +4,8 @@ import Temperature from "../components/Temperature";
 import MixedChart from "../components/MixedChart";
 import LineChart from "../components/LineChart";
 import Gauge2 from "../components/Gauge2";
+import Gauge from "../components/Gauge";
+import Gauge3 from "../components/Gauge3";
 
 function DashBoardPage() {
   return (
@@ -12,7 +14,8 @@ function DashBoardPage() {
         <Temperature />
       </div>
       <div className="col-span-1 mt-2">
-        <Gauge2 />
+      <Gauge3/>
+        {/* <Gauge2 /> */}
         {/* <Gauge title="Overall Progress" value={75} /> */}
       </div>
       <div className="col-span-1 mt-2 mr-8">
