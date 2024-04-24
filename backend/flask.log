@@ -2564,3 +2564,155 @@ INFO:werkzeug:127.0.0.1 - - [15/Apr/2024 18:23:23] "GET /statistics HTTP/1.1" 20
 INFO:werkzeug:127.0.0.1 - - [15/Apr/2024 18:23:23] "GET /dates HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [15/Apr/2024 18:23:23] "GET /statistics HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [15/Apr/2024 18:23:23] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-869-305
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\user\\anaconda3\\Lib\\site-packages\\sklearn\\base.py', reloading
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:07] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-869-305
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:12] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:12] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:14] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:15] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:15] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:15] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:17] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:32] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:32] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:36] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:36] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:36] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:36] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:36] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:36] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:37] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:37] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:37] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:37] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:37] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:40] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:40] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:40] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:40] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:40] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:40] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:41] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:41] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:41] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:41] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:41] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:41] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:41] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:41] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:41] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:42] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Apr/2024 17:47:47] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-869-305
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:09] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:10] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:10] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:10] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:10] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:10] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:10] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:10] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:10] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:10] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\user\\anaconda3\\Lib\\site-packages\\sklearn\\base.py', reloading
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:11] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-869-305
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:19] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:19] "GET /table HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:24] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:25] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2024 11:04:30] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-869-305
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:56] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:57] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:57] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:57] "GET /temperature HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:57] "GET /mixedChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:57] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:57] "GET /lineChart HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:57] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:57] "GET /statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:57] "GET /dates HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\user\\anaconda3\\Lib\\site-packages\\sklearn\\base.py', reloading
+INFO:werkzeug:127.0.0.1 - - [24/Apr/2024 16:59:58] "GET /gauge?specified_date=2014-12-27 HTTP/1.1" 200 -
+INFO:werkzeug: * Restarting with watchdog (windowsapi)

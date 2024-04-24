@@ -15,15 +15,15 @@ function DashBoardPage() {
         <Gauge2 />
         {/* <Gauge title="Overall Progress" value={75} /> */}
       </div>
-      <div className="col-span-1 mt-2">
+      <div className="col-span-1 mt-2 mr-8">
         <Statistics />
       </div>
       <div className="md:col-span-3">
         <div className="grid grid-cols-2 gap-6">
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 md:col-span-1 ml-8">
             <LineChart />
           </div>
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 md:col-span-1 mr-8">
             <MixedChart />
           </div>
         </div>
