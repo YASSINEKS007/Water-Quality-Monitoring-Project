@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../css/Gauge.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Gauge3() {
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const [wqi, setWQI] = useState(0);
   const [wqc, setWQC] = useState("");
   const [dates, setDates] = useState([]);
@@ -20,9 +22,9 @@ function Gauge3() {
           },
         });
         const responseData = await response.json();
-        setDates(responseData);
-        setSelectedDate(responseData[responseData.length - 1]); // Set selected date as the last date in the array
-        console.log(responseData);
+        const dateObjects = responseData.map((date) => new Date(date));
+        setDates(dateObjects);
+        setSelectedDate(dateObjects[dateObjects.length - 1]); // Set selected date as the last date in the array
       } catch (error) {
         console.error("Error fetching gauge dates:", error);
       }
@@ -37,26 +39,15 @@ function Gauge3() {
     }
   }, [selectedDate]);
 
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
   };
 
-  const inputProps = {
-    type: "date",
-    className: "border rounded px-2 py-1 mb-4 w-full",
-    value: selectedDate,
-    onChange: handleDateChange,
+  const disabledDates = {
+    minDate: new Date(Math.min.apply(null, dates)),
+    maxDate: new Date(Math.max.apply(null, dates)),
+    includeDates: dates, 
   };
-
-  const disabledDates = dates.map((date) => (
-    <option
-      key={date}
-      value={date}
-      disabled={dates.includes(date) ? null : "disabled"}
-    >
-      {date}
-    </option>
-  ));
 
   function colorSetUp(wqc_value) {
     if (wqc_value === "good") {
@@ -74,7 +65,7 @@ function Gauge3() {
   }
 
   const fetchData = (date) => {
-    fetch(`/api/gauge?specified_date=${date}`)
+    fetch(`/api/gauge?specified_date=${date.toISOString().slice(0, 10)}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -84,7 +75,6 @@ function Gauge3() {
       .then((data) => {
         setWQC(data.wqc);
         setWQI(parseFloat(data.wqi));
-        console.log(data);
       })
       .catch((error) => {
         console.error("There was a problem with your fetch operation:", error);
@@ -182,9 +172,22 @@ function Gauge3() {
 
       {showPopup && (
         <div className="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded shadow-md w-80">
+          <div
+            className="bg-white p-6 rounded shadow-md w-80"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <h2 className="text-lg font-bold mb-4 text-center">Select Date</h2>
-            <select {...inputProps}>{disabledDates}</select>
+            <DatePicker
+              selected={selectedDate}
+              onChange={handleDateChange}
+              {...disabledDates}
+              className="border rounded px-2 py-1 mb-4 w-full"
+              style={{ margin: "0 auto" }}
+            />
             <div className="flex justify-center">
               <button
                 className="bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 text-white px-5 py-3 rounded-md shadow-md transition-colors duration-300"

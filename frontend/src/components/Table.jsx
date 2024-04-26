@@ -152,7 +152,10 @@ function Table() {
 
   return (
     <div className="container mx-auto px-4 py-8 relative">
-      <div style={styling.inputContainer} className="InputContainer flex mb-4">
+      <div
+        style={styling.inputContainer}
+        className="InputContainer flex mb-4"
+      >
         <input
           placeholder="Search.."
           style={styling.input}
@@ -220,7 +223,10 @@ function Table() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {currentItems.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-50">
+              <tr
+                key={index}
+                className="hover:bg-gray-50"
+              >
                 <td className="px-6 py-4 whitespace-nowrap text-center border border-gray-200">
                   {item["date"]}
                 </td>
@@ -266,35 +272,56 @@ function Table() {
         </table>
       </div>
 
-      <div className="flex justify-center mt-4">
-        <ul style={paginationStyles} className="pagination">
-          
-          {/* Pagination Items */}
-          {Array.from(
-            { length: Math.ceil(filteredData.length / itemsPerPage) },
-            (_, i) => i + 1
-          ).map((pageNumber) => (
-            <li
-              key={pageNumber}
-              style={paginationItemStyles}
-              className={`pagination-item ${
-                pageNumber === currentPage ? "active" : ""
-              }`}
-            >
-              <button
-                style={{
-                  ...paginationButtonStyles,
-                  ...(pageNumber === currentPage ? activeButtonStyles : {}),
-                }}
-                onClick={() => paginate(pageNumber)}
-              >
-                {pageNumber}
-              </button>
-            </li>
-          ))}
-          {/* Pagination Next Button */}
-          
-        </ul>
+      <div className="flex items-center justify-center mt-4">
+        {/* Previous Button */}
+        <button
+          onClick={() =>
+            setCurrentPage((prev) => (prev === 1 ? prev : prev - 1))
+          }
+          disabled={currentPage === 1}
+          className="bg-purple-600 text-white px-4 py-2 rounded-lg flex items-center justify-center mr-4"
+        >
+          Prev
+        </button>
+
+        {/* Page Input */}
+        <div className="relative">
+          <input
+            placeholder="Page"
+            className="input appearance-none border border-gray-400 rounded w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+            name="text"
+            min="1"
+            max={Math.ceil(filteredData.length / itemsPerPage)}
+            value={currentPage}
+            onChange={(e) => {
+              const page = parseInt(e.target.value);
+              setCurrentPage(
+                page > 0
+                  ? page > Math.ceil(filteredData.length / itemsPerPage)
+                    ? Math.ceil(filteredData.length / itemsPerPage)
+                    : page
+                  : 1
+              );
+            }}
+          />
+        </div>
+
+        {/* Next Button */}
+        <button
+          onClick={() =>
+            setCurrentPage((prev) =>
+              prev === Math.ceil(filteredData.length / itemsPerPage)
+                ? prev
+                : prev + 1
+            )
+          }
+          disabled={
+            currentPage === Math.ceil(filteredData.length / itemsPerPage)
+          }
+          className="bg-purple-600 text-white px-4 py-2 rounded-lg flex items-center justify-center ml-4"
+        >
+          Next
+        </button>
       </div>
 
       <button
