@@ -12,9 +12,12 @@
   "dependencies": {
     "chart.js": "^4.4.2",
     "date-fns": "^3.6.0",
+    "docx": "^8.5.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "lodash": "^4.17.21",
+    "pdf-lib": "^1.17.1",
     "react": "^18.2.0",
     "react-calendar-datetime-picker": "^1.7.4",
     "react-chartjs-2": "^5.2.0",

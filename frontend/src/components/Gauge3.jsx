@@ -46,7 +46,7 @@ function Gauge3() {
   const disabledDates = {
     minDate: new Date(Math.min.apply(null, dates)),
     maxDate: new Date(Math.max.apply(null, dates)),
-    includeDates: dates, 
+    includeDates: dates,
   };
 
   function colorSetUp(wqc_value) {

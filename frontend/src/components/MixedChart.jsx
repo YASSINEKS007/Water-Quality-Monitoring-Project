@@ -240,7 +240,7 @@ const MixedChart = () => {
       {selectedYear && (
         <div className="flex justify-center p-4 border-b border-gray-200">
           <h1 className="text-xl font-bold text-gray-700 mt-8">
-            {selectedValue} distribution from{" "}
+            {selectedValue} Time Series from{" "}
             {new Date(startDate).toLocaleDateString("en-GB")} to{" "}
             {new Date(endDate).toLocaleDateString("en-GB")}
           </h1>{" "}
