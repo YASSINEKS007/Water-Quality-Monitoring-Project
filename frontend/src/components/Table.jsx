@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
+import "jspdf-autotable";
 import html2canvas from "html2canvas";
 import { FaFileAlt } from "react-icons/fa";
 
@@ -45,21 +46,81 @@ function Table() {
   }, []);
 
   const generateReport = () => {
-    const table = document.getElementById("report-table");
+    const doc = new jsPDF();
+    const tableRows = [];
+    const tableColumns = [
+      { title: "Date", dataKey: "date" },
+      { title: "Station Code", dataKey: "STATION CODE" },
+      { title: "Locations", dataKey: "LOCATIONS" },
+      { title: "State", dataKey: "STATE" },
+      { title: "Temp", dataKey: "Temp" },
+      { title: "D.O. (mg/l)", dataKey: "D.O. (mg/l)" },
+      { title: "PH", dataKey: "PH" },
+      {
+        title: "Conductivity (Âµmhos/cm)",
+        dataKey: "CONDUCTIVITY (Âµmhos/cm)",
+      },
+      { title: "B.O.D. (mg/l)", dataKey: "B.O.D. (mg/l)" },
+      {
+        title: "NITRATENAN N+ NITRITENANN (mg/l)",
+        dataKey: "NITRATENAN N+ NITRITENANN (mg/l)",
+      },
+      {
+        title: "Fecal Coliform (MPN/100ml)",
+        dataKey: "FECAL COLIFORM (MPN/100ml)",
+      },
+      {
+        title: "Total Coliform (MPN/100ml)Mean",
+        dataKey: "TOTAL COLIFORM (MPN/100ml)Mean",
+      },
+      { title: "Year", dataKey: "year" },
+    ];
 
-    html2canvas(table)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const imgWidth = 190; // A4 size
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-        const doc = new jsPDF();
-        doc.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
-        doc.save("report.pdf");
-      })
-      .catch((error) => {
-        console.error("Error generating report: ", error);
+    data.forEach((row) => {
+      const rowData = {};
+      tableColumns.forEach((column) => {
+        rowData[column.dataKey] = row[column.dataKey];
       });
+      tableRows.push(rowData);
+    });
+
+    doc.autoTable({
+      head: [tableColumns.map((column) => column.title)],
+      body: tableRows.map((row) =>
+        tableColumns.map((column) => row[column.dataKey])
+      ),
+      styles: { fontSize: 8, cellPadding: 2 },
+      margin: { top: 20, right: 10, bottom: 20, left: 10 },
+      showHead: "firstPage",
+      headStyles: {
+        fillColor: [103, 58, 183],
+        textColor: [255, 255, 255],
+        fontSize: 8,
+        halign: "center",
+      },
+      bodyStyles: { textColor: [0, 0, 0], fontSize: 8, halign: "center" },
+      columnStyles: { year: { fontStyle: "bold" } },
+      didDrawPage: function (data) {
+        // Header
+        doc.setFontSize(20);
+        doc.setTextColor(40);
+        const header = "Water Quality Data";
+        const pageWidth = doc.internal.pageSize.width;
+        const textWidth =
+          (doc.getStringUnitWidth(header) * doc.internal.getFontSize()) /
+          doc.internal.scaleFactor;
+        const textOffset = (pageWidth - textWidth) / 2;
+        doc.text(header, textOffset, 10);
+
+        // Footer
+        const pageCount = doc.internal.getNumberOfPages();
+        doc.setFontSize(12);
+        const footer = pageCount + " page(s)";
+        doc.text(footer, 10, doc.internal.pageSize.height - 10);
+      },
+    });
+
+    doc.save("data.pdf");
   };
 
   const handleSearchInputChange = (event) => {
