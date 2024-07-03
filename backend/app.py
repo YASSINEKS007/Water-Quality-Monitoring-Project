@@ -128,7 +128,6 @@ def wqi_gauge():
     df = data.copy()
     df.set_index("date", inplace=True)
     df.index = df.index.astype(str)
-    data_for_date = df.loc[specified_date]
     df = df.drop(columns=["STATION CODE", "LOCATIONS", "STATE", "Temp", "year"])
     for column in df.columns[: len(df.columns) - 1]:
         df[column] = pd.to_numeric(df[column], errors="coerce")
