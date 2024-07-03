@@ -163,14 +163,20 @@ const MixedChart = () => {
       </div>
       {/* More details dropdown */}
       <div className="absolute top-0 right-0 mt-4 mr-4 z-10">
-        <button className="focus:outline-none" onClick={toggleDropdown}>
+        <button
+          className="focus:outline-none"
+          onClick={toggleDropdown}
+        >
           <span className="text-black">...</span>
         </button>
         {showDropdown && (
           <div className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded overflow-hidden z-50">
             {/* Dropdown content */}
             <div className="p-2 hover:bg-gray-100">
-              <a href="#" onClick={togglePopup}>
+              <a
+                href="#"
+                onClick={togglePopup}
+              >
                 More Details
               </a>
             </div>
@@ -188,7 +194,10 @@ const MixedChart = () => {
             >
               <option value="2014">2014</option>
               {[2013, 2012].map((year) => (
-                <option key={year} value={year}>
+                <option
+                  key={year}
+                  value={year}
+                >
                   {year}
                 </option>
               ))}
@@ -247,7 +256,10 @@ const MixedChart = () => {
         </div>
       )}
 
-      <Bar data={dataset} options={options} />
+      <Bar
+        data={dataset}
+        options={options}
+      />
     </div>
   );
 };

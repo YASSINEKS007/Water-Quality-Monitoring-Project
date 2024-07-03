@@ -6,12 +6,12 @@ function LineChart() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedYear, setSelectedYear] = useState("2012");
-  const [newSelectedYear, setNewSelectedYear] = useState(selectedYear); // State to hold newly selected year
-  const [data, setData] = useState(null); // State for chart data
+  const [newSelectedYear, setNewSelectedYear] = useState(selectedYear); 
+  const [data, setData] = useState(null); 
 
   useEffect(() => {
     fetchData();
-  }, [selectedValue]); // Trigger fetchData on selectedValue or selectedYear change
+  }, [selectedValue]); 
 
   useEffect(() => {
     // Update selectedYear when the user clicks OK in the popup
